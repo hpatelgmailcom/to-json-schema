@@ -76,7 +76,11 @@ class ToJsonSchema {
     const objKeys = Object.keys(obj)
     if (objKeys.length > 0) {
       schema.properties = objKeys.reduce((acc, propertyName) => {
-        acc[propertyName] = this.getSchema(obj[propertyName]) // eslint-disable-line no-param-reassign
+        acc[propertyName] = {
+          ...this.getSchema(obj[propertyName]), // eslint-disable-line no-param-reassign
+          title: propertyName,
+          description: ''
+        }
         return acc
       }, {})
     }
